@@ -8,11 +8,11 @@ namespace RbacV2.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class Neo4jController : ControllerBase
+    public class RbacController : ControllerBase
     {
         private readonly ProcessingServices _processingServices;
 
-        public Neo4jController(ProcessingServices processingServices)
+        public RbacController(ProcessingServices processingServices)
         {
             _processingServices = processingServices;
         }
