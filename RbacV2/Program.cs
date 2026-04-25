@@ -4,15 +4,6 @@ using Neo4j.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-//var neo4jConfig = builder.Configuration.GetSection("Neo4j").Get<Neo4jSettings>();
-
-//builder.Services.AddSingleton(new Neo4jService(
-//    neo4jConfig.Uri,
-//    neo4jConfig.Username,
-//    neo4jConfig.Password,
-//    neo4jConfig.Database
-//));
 var config = builder.Configuration.GetSection("Neo4j").Get<Neo4jSettings>();
 builder.Services.AddSingleton<INeo4jService>(provider =>
 {
