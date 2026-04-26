@@ -28,7 +28,7 @@
                     var cypherStatements = new[]
                     {
                         // Tenant
-                        "MERGE (t2:Tenant {tenantId: 'T2'}) SET t2.name = 'ASB Bank'",
+                        "MERGE (t2:Tenant {tenantId: 'T2'}) SET t2.name = 'OCBC Bank'",
 
                         // Users
                         "MERGE (u1:User {userId: 'U1'}) SET u1.userName = 'smith@ocbc.com', u1.status = 'Active'",
