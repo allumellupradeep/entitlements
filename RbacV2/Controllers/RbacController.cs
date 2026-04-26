@@ -1,7 +1,4 @@
-﻿using Infrastructure;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Neo4j.Driver;
+﻿using Microsoft.AspNetCore.Mvc;
 using Domain;
 
 namespace RbacV2.Controllers
@@ -38,21 +35,22 @@ namespace RbacV2.Controllers
                 return BadRequest("Missing required headers");
             }
 
-            var isAuthorized = await _processingServices.Authorize(subject, permissionName, username);
-            if (isAuthorized)
+            var (isAuthorized, isActiveUser) = await _processingServices.Authorize(subject, permissionName, username);
+            if (isAuthorized && isActiveUser)
             {
                 return Ok(new
                 {
                     subject,
                     permissionName,
                     username,
-                    isAuthorized
+                    isAuthorized, 
+                    isActiveUser
                 });
             }
             return StatusCode(403, new
             {
                 status = "DENY",
-                message = "Access denied"
+                message = !isAuthorized ? "Access denied" : "User is not active"
             });
         }
     }

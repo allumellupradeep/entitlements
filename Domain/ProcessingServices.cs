@@ -10,7 +10,7 @@ namespace Domain
             _neo4jService = neo4jService;
         }
 
-        public async Task<bool> Authorize(string subject, string permissionName, string username)
+        public async Task<(bool isAuthorized, bool isActiveUser)> Authorize(string subject, string permissionName, string username)
         {
             var auth = new Auth
             {
@@ -19,7 +19,6 @@ namespace Domain
                 username = username
             };
             var result = await _neo4jService.RunQueryAsync(auth);
-            // Example query, adjust as needed
             return result;
         }
 

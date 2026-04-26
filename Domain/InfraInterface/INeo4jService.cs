@@ -2,7 +2,7 @@
 {
     public interface INeo4jService
     {
-        Task<bool> RunQueryAsync( Auth auth);
+        Task<(bool isAuthorized, bool isActiveUser)> RunQueryAsync( Auth auth);
         Task<string> RunQueryAsync(string query, object parameters);
             
     }

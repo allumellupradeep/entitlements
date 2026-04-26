@@ -1,13 +1,11 @@
 ﻿namespace Infrastructure
 {
     using Domain;
-    using Microsoft.Extensions.Configuration;
     using Neo4j.Driver;
 
     public class Neo4jService : INeo4jService, IAsyncDisposable
     {
         private readonly IDriver _driver;
-        private readonly IConfiguration config;
         private readonly string _databaseName;
 
         public Neo4jService(string uri, string username, string password, string database)
@@ -30,16 +28,19 @@
             return record["message"].As<string>();
         }
 
-        public async Task<bool> RunQueryAsync(Auth auth)
+        public async Task<(bool isAuthorized, bool isActiveUser)> RunQueryAsync(Auth auth)
         {
-            var cypherQuery = @"
-                        MATCH (t:Tenant {tenantId: $tenantId})
-                        -[:OWNS_USERGROUP]->(g:UserGroup)
-                        -[:OWNS]->(u:User {userName: $username}),
-                        (g)-[:OWNS_ROLE]->(:Role)
-                        -[:HAS_PERMISSION]->(p:Permission {action: $permission})
-                        RETURN COUNT(p) > 0 AS isAllowed
-                        ";
+            var cypherQuery = @"OPTIONAL MATCH (t:Tenant {tenantId: $tenantId})
+                                OPTIONAL MATCH (t)-[:OWNS_USERGROUP]->(g:UserGroup)-[:OWNS]->(u:User {userName: $username})
+                                OPTIONAL MATCH (g)-[:OWNS_ROLE]->(r:Role)-[:HAS_PERMISSION]->(p:Permission {action: $permission})
+
+                                WITH u, COUNT(DISTINCT p) AS permCount
+
+                                RETURN 
+                                    (permCount > 0) AS isAllowed,
+                                    (u IS NOT NULL AND u.status = 'Active') AS isActiveUser
+                                LIMIT 1
+                                ";
             await using var session = CreateSession();
             var result = await session.RunAsync(cypherQuery, new
             {
@@ -49,8 +50,8 @@
             });
 
             var record = await result.SingleAsync();
-            bool isAllowed = record["isAllowed"].As<bool>();
-            return isAllowed;
+
+            return (record["isAllowed"].As<bool>(), record["isActiveUser"].As<bool>());
         }
 
         public async ValueTask DisposeAsync()
