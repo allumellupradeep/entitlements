@@ -1,0 +1,762 @@
+{
+  "info": {
+    "_postman_id": "4f65e09b-8247-4df7-9957-d48bf03fd95a",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54317062",
+    "_collection_link": "https://go.postman.co/collection/54317062-4f65e09b-8247-4df7-9957-d48bf03fd95a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "SalesDeptScripts",
+      "item": [
+        {
+          "name": "John_CallCustomer_AllowPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Allow permission request returns success status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "",
+                  "pm.test('Allow permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Allow permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.code !== 204 && pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "john@ocbc.com",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "CALL_CUSTOMER",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Smith_CallCustomer_DenyPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Deny permission request returns an authorization failure status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([403]);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "smith@ocbc.com",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "CALL_CUSTOMER",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ChenTan_CallCustomer_DenyPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Deny permission request returns an authorization failure status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([403]);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "chentan@ocbc.com",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "CALL_CUSTOMER",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "PaymentDeptScripts",
+      "item": [
+        {
+          "name": "John_InitiatePayment_AllowPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Allow permission request returns success status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "",
+                  "pm.test('Allow permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Allow permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.code !== 204 && pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "john@ocbc.com",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "INITIATE_PAYMENT",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ChenTan_InitiatePayment_AllowPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Allow permission request returns success status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "",
+                  "pm.test('Allow permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Allow permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.code !== 204 && pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "chentan@ocbc.com",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "INITIATE_PAYMENT",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Smith_InitiatePayment_DenyPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Deny permission request returns an authorization failure status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([403]);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "smith@ocbc.com",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "INITIATE_PAYMENT",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ServicesDeptScripts",
+      "item": [
+        {
+          "name": "Smith_ReadCustomer_AllowPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Allow permission request returns success status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "",
+                  "pm.test('Allow permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Allow permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.code !== 204 && pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "smith@ocbc.com",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "READ_CUSTOMER",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "John_ReadCustomer_DenyPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Deny permission request returns an authorization failure status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([403]);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "john@ocbc.co",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "READ_CUSTOMER",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ChenTan_ReadCustomer_DenyPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Deny permission request returns an authorization failure status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([403]);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "chentan@ocbc.co",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "READ_CUSTOMER",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "InvalidUserScripts",
+      "item": [
+        {
+          "name": "InvalidUser_InitiatePayment_DenyPermission",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Deny permission request returns an authorization failure status', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([403]);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Deny permission response has a recognizable content type when a body is returned', function () {",
+                  "    if (pm.response.text().length > 0) {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.match(/application\\/(json|problem\\+json|text\\+json)|text\\//i);",
+                  "    } else {",
+                  "        pm.expect(true).to.be.true;",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "subject",
+                "value": "T2",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "invaliduser@ocbc.com",
+                "type": "text"
+              },
+              {
+                "key": "permissionName",
+                "value": "INITIATE_PAYMENT",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:44387/api/Rbac/authorize",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "44387",
+              "path": [
+                "api",
+                "Rbac",
+                "authorize"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

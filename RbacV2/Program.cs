@@ -38,7 +38,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Rbac V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Rbac");
         c.RoutePrefix = string.Empty; 
     });
     app.MapOpenApi();
